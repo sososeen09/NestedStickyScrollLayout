@@ -1,0 +1,112 @@
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
+
+def libName = project.hasProperty("MAVEN_ARTIFACT_ID") ? project.MAVEN_ARTIFACT_ID : project.name
+def mavenDesc = "a nested sticky scroll layout，can be a parent view of RecyclerView"
+def baseUrl = 'https://github.com/sososeen09/NestedStickyScrollLayout'
+def siteUrl = baseUrl
+def gitUrl = "${baseUrl}.git"
+def issueUrl = "${baseUrl}/issues"
+
+def licenseIds = ['Apache-2.0']
+def licenseNames = ['The Apache Software License, Version 2.0']
+def licenseUrls = ['http://www.apache.org/licenses/LICENSE-2.0.txt']
+def inception = '2018'
+
+Properties props = new Properties()
+try {
+    props.load(project.rootProject.file('local.properties').newDataInputStream())
+} catch (Throwable e) {
+    e.printStackTrace()
+}
+
+def bintray_user = props.getProperty("BINTRAY_USER","")
+def bintray_key = props.getProperty("BINTRAY_KEY","")
+
+install {
+    repositories {
+        mavenInstaller {
+            pom.project {
+                // Description
+                name libName
+                description mavenDesc
+                url siteUrl
+
+                // Archive
+                groupId project.group
+                artifactId libName
+                version project.version
+
+                // License
+                inceptionYear inception
+                licenses {
+                    licenseNames.eachWithIndex { ln, li ->
+                        license {
+                            name ln
+                            url licenseUrls[li]
+                        }
+                    }
+                }
+                developers {
+                    developer {
+                        name bintray_user
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+//生成文档
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    options.encoding "UTF-8"
+    options.charSet 'UTF-8'
+    options.author true
+    options.version true
+    options.links "https://github.com/sososeen09/NestedStickyScrollLayout/tree/master/library/docs/javadoc"
+    failOnError false
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+tasks['javadoc'].enabled = false
+
+bintray {
+    user = bintray_user
+    key = bintray_key
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = "${libName}"
+        desc = mavenDesc
+        websiteUrl = siteUrl
+        issueTrackerUrl = issueUrl
+        vcsUrl = gitUrl
+        labels = ['android', 'sticky', 'scroll','layout']
+        licenses = licenseIds
+        publish = true
+        publicDownloadNumbers = true
+    }
+}
