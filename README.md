@@ -94,6 +94,6 @@ dependencies {
 
 # Sample screenshots
 
-<img src="art/screenshot-NestedStickyScrollLayout1.png" width=216/> <img src="art/NestedStickyScrollLayout2.png" width=216/>
+<img src="art/NestedStickyScrollLayout1.png" width=216/> <img src="art/NestedStickyScrollLayout2.png" width=216/>
 
 
