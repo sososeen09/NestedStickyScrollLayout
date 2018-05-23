@@ -94,7 +94,6 @@ dependencies {
 
 # Sample screenshots
 
-![](art/NestedStickyScrollLayout1.png)
-![](art/NestedStickyScrollLayout2.png)
+<img src="art/screenshot-NestedStickyScrollLayout1" width=216/> <img src="art/NestedStickyScrollLayout2-bilibili.png" width=216/>
 
 
