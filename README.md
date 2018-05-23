@@ -2,7 +2,6 @@
 
 a nested sticky scroll layout，can be a parent view of RecyclerView
 
-
 # Getting started
 
 Step 1 Add it in your root build.gradle at the end of repositories:
@@ -92,4 +91,9 @@ dependencies {
     </FrameLayout>
 </com.sososeen09.sticky.NestedStickyScrollLayout>
 ```
+
+# Sample screenshots
+
+![](art/NestedStickyScrollLayout-demo.gif)
+
 
