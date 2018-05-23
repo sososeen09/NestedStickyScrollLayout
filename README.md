@@ -3,6 +3,25 @@
 a nested sticky scroll layout，can be a parent view of RecyclerView
 
 
+# Getting started
+
+Step 1 Add it in your root build.gradle at the end of repositories:
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Step 2 Add the dependency
+```
+dependencies {
+    implementation 'com.github.sososeen09:NestedStickyScrollLayout:0.0.1'
+}
+```
+
 # How to use
 可以像LinearLayout那样在xml中使用，不同之处在于NestedStickyScrollLayout需要设置滚动源和粘性头部
 对应的属性是
