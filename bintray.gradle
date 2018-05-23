@@ -2,7 +2,8 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 apply plugin: 'com.github.dcendents.android-maven'
 
-def libName = project.hasProperty("MAVEN_ARTIFACT_ID") ? project.MAVEN_ARTIFACT_ID : project.name
+def libName = project.hasProperty("artifact_id") ? project.artifact_id : project.name
+project.logger.quiet("find libName: ${libName}")
 def mavenDesc = "a nested sticky scroll layout，can be a parent view of RecyclerView"
 def baseUrl = 'https://github.com/sososeen09/NestedStickyScrollLayout'
 def siteUrl = baseUrl
@@ -21,18 +22,19 @@ try {
     e.printStackTrace()
 }
 
-def bintray_user = props.getProperty("BINTRAY_USER","")
-def bintray_key = props.getProperty("BINTRAY_KEY","")
+def bintray_user = props.getProperty("BINTRAY_USER", "")
+def bintray_key = props.getProperty("BINTRAY_KEY", "")
 
 install {
     repositories {
         mavenInstaller {
             pom.project {
+                packaging 'aar'
                 // Description
                 name libName
                 description mavenDesc
                 url siteUrl
-
+                project.logger.quiet("libName: ${libName}")
                 // Archive
                 groupId project.group
                 artifactId libName
@@ -99,12 +101,12 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = 'maven'
-        name = "${libName}"
+        name = libName
         desc = mavenDesc
         websiteUrl = siteUrl
         issueTrackerUrl = issueUrl
         vcsUrl = gitUrl
-        labels = ['android', 'sticky', 'scroll','layout']
+        labels = ['android', 'sticky', 'scroll', 'layout']
         licenses = licenseIds
         publish = true
         publicDownloadNumbers = true

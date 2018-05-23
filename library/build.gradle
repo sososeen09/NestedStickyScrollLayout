@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
-
+project.archivesBaseName = project.artifact_id
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
