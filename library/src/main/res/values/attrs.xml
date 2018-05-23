@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NestedStickyScrollLayout">
+        <!--到顶部就不在移动的View-->
+        <attr name="sticky_view" format="integer"/>
+        <!--滚动源-->
+        <attr name="scroll_source_view" format="integer"/>
+    </declare-styleable>
+</resources>
