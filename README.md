@@ -94,6 +94,7 @@ dependencies {
 
 # Sample screenshots
 
-![](art/NestedStickyScrollLayout-demo.gif)
+![](art/NestedStickyScrollLayout1.png)
+![](art/NestedStickyScrollLayout2.png)
 
 
