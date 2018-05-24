@@ -201,7 +201,7 @@ public class NestedStickyScrollLayout extends LinearLayout implements NestedScro
                 }
             }
             if (mScrollView.getVisibility() != GONE) {
-                LayoutParams params = (LayoutParams) mScrollView.getLayoutParams();
+                ViewGroup.LayoutParams params = mScrollView.getLayoutParams();
                 params.height = getMeasuredHeight() - mStickyView.getMeasuredHeight();
                 mScrollView.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(params.height, MeasureSpec.AT_MOST));
             }
